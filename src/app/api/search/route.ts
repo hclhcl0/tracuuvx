@@ -26,8 +26,8 @@ export async function GET(request: Request) {
   }
 
   try {
-    // Open the SQLite database dynamically based on current working directory
-    const dbPath = path.join(process.cwd(), 'vaccinations.db');
+    // Open the SQLite database dynamically based on environment variable or fallback to local
+    const dbPath = process.env.DB_PATH || path.join(process.cwd(), 'vaccinations.db');
     const db = new DatabaseSync(dbPath);
 
     let query = 'SELECT * FROM records WHERE 1=1';
